@@ -56,8 +56,8 @@ class Graph(object):
         if not (v.v_id(), u.v_id()) in  self.__e.keys():
             self.__e[(v.v_id, u.v_id)] = wight
             self.__e[(u.v_id, v.v_id)] = wight
-            self.__adj[v.v_id()] = (u.v_id(), wight)
-            self.__adj[u.v_id()] = (v.v_id(), wight)
+            self.__adj[v.v_id()].append((u.v_id(), wight))
+            self.__adj[u.v_id()].append((v.v_id(), wight))
 
 
     def has_e(self, v: Vertice, u: Vertice) -> bool:
