@@ -12,6 +12,7 @@ class Vertice(object):
         self.__y = y
         self.__v_id = v_id
         self.__distance = sys.maxsize
+        self.__p = None
 
 
 
@@ -92,4 +93,4 @@ class Graph(object):
         return self.__adj[v.v_id()]
 
 
-    
+
