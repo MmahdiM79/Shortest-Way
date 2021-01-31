@@ -31,6 +31,12 @@ class Vertice(object):
     def distance(self) -> int:
         return self.__distance
 
+    def set_parrent(self, parrent) -> None:
+        self.__p = parrent
+
+    def parrent(self):
+        return self.__p
+
 
 
 
