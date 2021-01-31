@@ -48,14 +48,14 @@ class Graph(object):
 
     def add_v(self, v: Vertice) -> None:
         if not v in self.__v:
-            self.__v.append(Vertice)
+            self.__v.append(v)
             self.__adj[v.v_id()] = []
 
     
     def add_e(self, v: Vertice, u: Vertice, wight: float) -> None:
         if not (v.v_id(), u.v_id()) in  self.__e.keys():
-            self.__e[(v.v_id, u.v_id)] = wight
-            self.__e[(u.v_id, v.v_id)] = wight
+            self.__e[(v.v_id(), u.v_id())] = wight
+            self.__e[(u.v_id(), v.v_id())] = wight
             self.__adj[v.v_id()].append((u.v_id(), wight))
             self.__adj[u.v_id()].append((v.v_id(), wight))
 
@@ -70,14 +70,14 @@ class Graph(object):
             self.__e[(v.v_id(), u.v_id())] = wight
             self.__e[(u.v_id(), v.v_id())] = wight
 
-            for neighbor in range(self.__adj[v.v_id()]):
+            for neighbor in self.__adj[v.v_id()]:
                 if neighbor[0] == u.v_id():
                     if neighbor[1] != wight:
                         self.__adj[v.v_id()].remove(neighbor)
                         self.__adj[v.v_id()].append((u.v_id(), wight))
                     break
 
-            for neighbor in range(self.__adj[u.v_id()]):
+            for neighbor in self.__adj[u.v_id()]:
                 if neighbor[0] == v.v_id():
                     if neighbor[1] != wight:
                         self.__adj[u.v_id()].remove(neighbor)
