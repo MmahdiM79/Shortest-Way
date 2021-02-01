@@ -1,45 +1,4 @@
-import sys
-import MinHeap
-
-
-
-
-class Vertice(object):
-
-
-    def __init__(self, x: int, y: int, v_id: str) -> None:
-        self.__x = x
-        self.__y = y
-        self.__v_id = v_id
-        self.__distance = sys.maxsize
-        self.__p = None
-
-
-
-    def x(self) -> int:
-        return self.__x
-
-    def y(self) -> int:
-        return self.__y
-
-    def v_id(self) -> str:
-        return self.__v_id
-
-    def set_distance(self, distance: float) -> None:
-        self.__distance = distance
-
-    def distance(self) -> int:
-        return self.__distance
-
-    def set_parrent(self, parrent) -> None:
-        self.__p = parrent
-
-    def parrent(self):
-        return self.__p
-
-
-
-
+from min_heap import MinHeap, Vertice
 
 
 
@@ -92,11 +51,31 @@ class Graph(object):
                     break
 
 
-
     def e_wight(self, v: Vertice, u: Vertice) -> float:
         if not self.has_e(v, u):
             return -1
         return self.__adj[v.v_id()]
+
+
+    def shortest_path(self, start: Vertice, destination: Vertice) -> tuple:
+        for v in self.__v.values():
+            v.set_distance(-1)
+            v.set_parrent(None)
+
+        
+        unexplored = MinHeap(len(self.__v))
+        MinHeap.update(start.v_id(), 0)
+        self.__v[start.v_id].set_distance(0)
+
+        explored = []
+        while not destination.v_id() in explored:
+            v = unexplored.pop_min()
+            explored.append(v.v_id())
+            for edge in self.__adj[v.v_id()]:
+                if v.distance() + edge[1] < self.__v[edge[1]].distance():
+                    unexplored.update(edge[0], v.distance() + edge[1])
+                    self.__v[edge[0]].set_distance(v.distance() + edge[1])
+                    self.__v[edge[0]].set_parrent(v)
 
 
 
