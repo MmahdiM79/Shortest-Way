@@ -47,7 +47,7 @@ class Graph(object):
 
 
     def __init__(self) -> None:
-        self.__v = []
+        self.__v = {}
         self.__e = {}
         self.__adj = {}
 
@@ -55,7 +55,7 @@ class Graph(object):
 
     def add_v(self, v: Vertice) -> None:
         if not v in self.__v:
-            self.__v.append(v)
+            self.__v[v.v_id()] = v
             self.__adj[v.v_id()] = []
 
     
@@ -97,6 +97,7 @@ class Graph(object):
         if not self.has_e(v, u):
             return -1
         return self.__adj[v.v_id()]
+
 
 
 
