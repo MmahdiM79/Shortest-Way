@@ -1,5 +1,4 @@
-from Graph import Vertice
-
+from vertice import Vertice
 
 
 
