@@ -1,4 +1,5 @@
-
+from __future__ import annotations
+import sys
 
 
 
@@ -29,8 +30,8 @@ class Vertice(object):
     def distance(self) -> int:
         return self.__distance
 
-    def set_parrent(self, parrent) -> None:
+    def set_parrent(self, parrent: Vertice) -> None:
         self.__p = parrent
 
-    def parrent(self):
+    def parrent(self) -> Vertice:
         return self.__p
