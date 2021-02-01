@@ -25,6 +25,8 @@ class Vertice(object):
         return self.__v_id
 
     def set_distance(self, distance: float) -> None:
+        if distance == -1:
+            self.__distance = sys.maxsize
         self.__distance = distance
 
     def distance(self) -> int:
