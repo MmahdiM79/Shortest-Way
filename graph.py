@@ -64,19 +64,27 @@ class Graph(object):
 
         
         unexplored = MinHeap(len(self.__v))
-        MinHeap.update(start.v_id(), 0)
-        self.__v[start.v_id].set_distance(0)
+        for v in self.__v.values():
+            unexplored.insert(v)
+        unexplored.update(start.v_id(), 0)
+        self.__v[start.v_id()].set_distance(0)
 
         explored = []
         while not destination.v_id() in explored:
             v = unexplored.pop_min()
             explored.append(v.v_id())
             for edge in self.__adj[v.v_id()]:
-                if v.distance() + edge[1] < self.__v[edge[1]].distance():
+                if v.distance() + edge[1] < self.__v[edge[0]].distance():
                     unexplored.update(edge[0], v.distance() + edge[1])
                     self.__v[edge[0]].set_distance(v.distance() + edge[1])
                     self.__v[edge[0]].set_parrent(v)
 
 
+        finded_path = []; curr = destination
+        while curr is not start:
+            finded_path.append(curr.v_id())
+            curr = curr.parrent()
+        finded_path.append(curr.v_id())
 
+        return tuple(reversed(finded_path))
 
