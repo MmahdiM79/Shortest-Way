@@ -6,7 +6,7 @@ import sys
 class Vertice(object):
 
 
-    def __init__(self, x: int, y: int, v_id: str) -> None:
+    def __init__(self, x: float, y: float, v_id: str) -> None:
         self.__x = x
         self.__y = y
         self.__v_id = v_id
@@ -15,10 +15,10 @@ class Vertice(object):
 
 
 
-    def x(self) -> int:
+    def x(self) -> float:
         return self.__x
 
-    def y(self) -> int:
+    def y(self) -> float:
         return self.__y
 
     def v_id(self) -> str:
