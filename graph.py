@@ -117,6 +117,9 @@ class Graph(object):
         
         finded_path.append(curr.v_id())
         finded_path.append(120*travel_time)
+        self.__traffic[(start.v_id(), destination.v_id())].append(120*travel_time)
+        self.__traffic[(destination.v_id(), start.v_id())].append(120*travel_time)
+
 
         return tuple(reversed(finded_path))
 
