@@ -20,11 +20,20 @@ class Graph(object):
 
     
     def add_e(self, v: Vertice, u: Vertice, wight: float) -> None:
+
         if not self.has_e(v, u):
+
+            if wight == -1:
+                wight = self.__weight(v, u, 0);
+
             self.__e[(v.v_id(), u.v_id())] = wight
             self.__e[(u.v_id(), v.v_id())] = wight
             self.__adj[v.v_id()].append((u.v_id(), wight))
             self.__adj[u.v_id()].append((v.v_id(), wight))
+
+            self.__traffic[(v.v_id(), u.v_id())] = []
+            self.__traffic[(u.v_id(), v.v_id())] = []
+
 
 
     def has_e(self, v: Vertice, u: Vertice) -> bool:
