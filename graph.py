@@ -9,6 +9,7 @@ class Graph(object):
         self.__v = {}
         self.__e = {}
         self.__adj = {}
+        self.__traffic = {}
 
 
 
