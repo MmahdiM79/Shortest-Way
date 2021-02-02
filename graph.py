@@ -105,11 +105,18 @@ class Graph(object):
                     self.__v[edge[0]].set_parrent(v)
 
 
-        finded_path = []; curr = destination
+
+        finded_path = [] 
+        curr = destination
+        travel_time = 0
+
         while curr is not start:
             finded_path.append(curr.v_id())
+            travel_time += self.e_weight(curr.v_id(), curr.parrent().v_id())
             curr = curr.parrent()
+        
         finded_path.append(curr.v_id())
+        finded_path.append(120*travel_time)
 
         return tuple(reversed(finded_path))
 
