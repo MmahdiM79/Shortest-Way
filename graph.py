@@ -88,3 +88,12 @@ class Graph(object):
 
         return tuple(reversed(finded_path))
 
+
+
+
+
+    def __weight(self, v: Vertice, u: Vertice, traffic: int) -> float:
+
+        length = ((v.x() - u.x())**2 + (v.y() - u.y())**2)**(0.5)
+
+        return length * (1 + 0.3*traffic)
