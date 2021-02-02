@@ -19,17 +19,17 @@ class Graph(object):
             self.__adj[v.v_id()] = []
 
     
-    def add_e(self, v: Vertice, u: Vertice, wight: float) -> None:
+    def add_e(self, v: Vertice, u: Vertice, weight: float) -> None:
 
         if not self.has_e(v, u):
 
-            if wight == -1:
-                wight = self.__weight(v, u, 0);
+            if weight == -1:
+                weight = self.__weight(v, u, 0);
 
-            self.__e[(v.v_id(), u.v_id())] = wight
-            self.__e[(u.v_id(), v.v_id())] = wight
-            self.__adj[v.v_id()].append((u.v_id(), wight))
-            self.__adj[u.v_id()].append((v.v_id(), wight))
+            self.__e[(v.v_id(), u.v_id())] = weight
+            self.__e[(u.v_id(), v.v_id())] = weight
+            self.__adj[v.v_id()].append((u.v_id(), weight))
+            self.__adj[u.v_id()].append((v.v_id(), weight))
 
             self.__traffic[(v.v_id(), u.v_id())] = []
             self.__traffic[(u.v_id(), v.v_id())] = []
@@ -40,28 +40,28 @@ class Graph(object):
         return ((v.v_id(), u.v_id()) in self.__e.keys())
 
 
-    def set_e_wight(self, v: Vertice, u: Vertice, wight: float) -> None:
+    def set_e_weight(self, v: Vertice, u: Vertice, weight: float) -> None:
 
         if self.has_e(v, u):
-            self.__e[(v.v_id(), u.v_id())] = wight
-            self.__e[(u.v_id(), v.v_id())] = wight
+            self.__e[(v.v_id(), u.v_id())] = weight
+            self.__e[(u.v_id(), v.v_id())] = weight
 
             for neighbor in self.__adj[v.v_id()]:
                 if neighbor[0] == u.v_id():
-                    if neighbor[1] != wight:
+                    if neighbor[1] != weight:
                         self.__adj[v.v_id()].remove(neighbor)
-                        self.__adj[v.v_id()].append((u.v_id(), wight))
+                        self.__adj[v.v_id()].append((u.v_id(), weight))
                     break
 
             for neighbor in self.__adj[u.v_id()]:
                 if neighbor[0] == v.v_id():
-                    if neighbor[1] != wight:
+                    if neighbor[1] != weight:
                         self.__adj[u.v_id()].remove(neighbor)
-                        self.__adj[u.v_id()].append((v.v_id(), wight))
+                        self.__adj[u.v_id()].append((v.v_id(), weight))
                     break
 
 
-    def e_wight(self, v: Vertice, u: Vertice) -> float:
+    def e_weight(self, v: Vertice, u: Vertice) -> float:
         if not self.has_e(v, u):
             return -1
         
@@ -91,7 +91,7 @@ class Graph(object):
 
             v = self.__v[start.v_id()]
             u = self.__v[destination.v_id()]
-            self.set_e_wight(v, u, self.__weight(v, u, traffic))
+            self.set_e_weight(v, u, self.__weight(v, u, traffic))
 
 
         explored = []
