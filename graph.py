@@ -19,7 +19,7 @@ class Graph(object):
 
     
     def add_e(self, v: Vertice, u: Vertice, wight: float) -> None:
-        if not (v.v_id(), u.v_id()) in  self.__e.keys():
+        if not self.has_e(v, u):
             self.__e[(v.v_id(), u.v_id())] = wight
             self.__e[(u.v_id(), v.v_id())] = wight
             self.__adj[v.v_id()].append((u.v_id(), wight))
