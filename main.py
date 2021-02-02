@@ -25,7 +25,17 @@ if __name__ == "__main__":
             edges[(map_details[j+1], map_details[j])] = -1
             g.add_e(vertices[map_details[j]], vertices[map_details[j+1]], -1)
 
-        print(vertices, '\n', edges)
+        
+        while (True):
+            line = input().split()
+            if len(line) == 1:
+                break
+
+            req_t = float(line[0])
+            start = vertices[line[1]]
+            dest = vertices[line[2]]
+
+            print(g.shortest_path(start, dest, req_t))
 
 
 
