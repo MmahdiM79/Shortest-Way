@@ -20,10 +20,12 @@ if __name__ == "__main__":
             vertices[map_details[i]] = Vertice(float(map_details[i+2]), float(map_details[i+1]), map_details[i])
             g.add_v(vertices[map_details[i]])
         
-        for j in range((3*number_of_vertices + 2), number_of_edges*2, 2):
+        for j in range((3*number_of_vertices + 2), len(map_details), 2):
             edges[(map_details[j], map_details[j+1])] = -1
             edges[(map_details[j+1], map_details[j])] = -1
-            g.add_e(vertices[map_details[j]], map_details[j+1], -1)
+            g.add_e(vertices[map_details[j]], vertices[map_details[j+1]], -1)
+
+        print(vertices, '\n', edges)
 
 
 
