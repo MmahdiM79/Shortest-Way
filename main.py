@@ -35,7 +35,11 @@ if __name__ == "__main__":
             start = vertices[line[1]]
             dest = vertices[line[2]]
 
-            print(g.shortest_path(start, dest, req_t))
+            res = g.shortest_path(start, dest, req_t)
+            print(f"\ntravel time: {format(res[0], '.3f')} ,  way: ", end='')
+            for i in range(1, len(res)-1):
+                print(res[i], '--> ', end='')
+            print(res[-1], '\n\n')
 
 
 
