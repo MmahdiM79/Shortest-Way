@@ -64,7 +64,10 @@ class Graph(object):
     def e_wight(self, v: Vertice, u: Vertice) -> float:
         if not self.has_e(v, u):
             return -1
-        return self.__adj[v.v_id()]
+        
+        for edge in self.__adj[v.v_id()]:
+            if edge[0] == u.v_id():
+                return edge[1]
 
 
     def shortest_path(self, start: Vertice, destination: Vertice, time: float) -> tuple:
