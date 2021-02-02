@@ -87,11 +87,12 @@ class Graph(object):
         for edge in self.__traffic.keys():
             for t in self.__traffic[edge]:
                 if time <= t:
-                    traffic += 0.5
+                    traffic += 1
 
-            v = self.__v[start.v_id()]
-            u = self.__v[destination.v_id()]
+            v = self.__v[edge[0]]
+            u = self.__v[edge[1]]
             self.set_e_weight(v, u, self.__weight(v, u, traffic))
+            traffic = 0
 
 
         explored = []
@@ -112,14 +113,16 @@ class Graph(object):
 
         while curr is not start:
             finded_path.append(curr.v_id())
-            travel_time += self.e_weight(curr.v_id(), curr.parrent().v_id())
+            travel_time += self.e_weight(curr, curr.parrent())
             curr = curr.parrent()
         
-        finded_path.append(curr.v_id())
-        finded_path.append(120*travel_time)
-        self.__traffic[(start.v_id(), destination.v_id())].append(120*travel_time)
-        self.__traffic[(destination.v_id(), start.v_id())].append(120*travel_time)
+        travel_time *= 120
 
+        finded_path.append(curr.v_id())
+        for i in range(len(finded_path)-1):
+            self.__traffic[(finded_path[i], finded_path[i+1])].append(travel_time)
+            self.__traffic[(finded_path[i+1], finded_path[i])].append(travel_time)
+        finded_path.append(travel_time)
 
         return tuple(reversed(finded_path))
 
