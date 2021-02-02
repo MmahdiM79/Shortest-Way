@@ -67,7 +67,7 @@ class Graph(object):
         return self.__adj[v.v_id()]
 
 
-    def shortest_path(self, start: Vertice, destination: Vertice) -> tuple:
+    def shortest_path(self, start: Vertice, destination: Vertice, time: float) -> tuple:
         for v in self.__v.values():
             v.set_distance(-1)
             v.set_parrent(None)
@@ -78,6 +78,18 @@ class Graph(object):
             unexplored.insert(v)
         unexplored.update(start.v_id(), 0)
         self.__v[start.v_id()].set_distance(0)
+
+
+        traffic = 0
+        for edge in self.__traffic.keys():
+            for t in self.__traffic[edge]:
+                if time <= t:
+                    traffic += 0.5
+
+            v = self.__v[start.v_id()]
+            u = self.__v[destination.v_id()]
+            self.set_e_wight(v, u, self.__weight(v, u, traffic))
+
 
         explored = []
         while not destination.v_id() in explored:
